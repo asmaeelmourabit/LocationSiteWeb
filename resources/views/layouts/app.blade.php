@@ -1,6 +1,4 @@
-@extends('layout')
 <!DOCTYPE html>
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -20,36 +18,29 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    @section('contentfluid')
+    <body class="font-sans antialiased">
+        <x-jet-banner />
 
-    <x-jet-banner />
+        <div class="min-h-screen bg-gray-100">
+            @livewire('navigation-menu')
 
-    <div class="min-h-screen bg-gray-100">
-
-
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header >
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{auth()->user()->name."'s Profile"}}
-                </div>
-            </header>
-        @endif
-
-        <!-- Page Content -->
-        <main>
-            @if (isset( $slot))
-            {{ $slot }}
-
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
             @endif
 
-        </main>
-    </div>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
 
         @stack('modals')
 
         @livewireScripts
-        @endsection
-
-
+    </body>
 </html>
